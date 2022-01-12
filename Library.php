@@ -96,6 +96,11 @@ class Library {
                         // var_dump($tmpRet);
                         $ret_DataArray = array_merge($ret_DataArray, $tmpRet);
                         break;
+                    case "m":
+                        $valueArray = str_split($value->value, 2);
+                        foreach($valueArray as $val){
+                            array_push($ret_DataArray, $val);
+                        }
                 }
             }
         }

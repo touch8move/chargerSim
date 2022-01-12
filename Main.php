@@ -17,6 +17,7 @@ require_once "TransJ.php";
 // require_once "TransN.php";
 
 $memberNo = "e0c11001a0083687";
+// $memberNo = "1111111111111111";
 $controller = new Controller(
     new Charger("11111111","01","1","1","1","CTT0000000","5","012333333333"),
     "127.0.0.1",
