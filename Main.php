@@ -30,7 +30,7 @@ $controller = new Controller(
 // $controller->test(new TransE($controller->charger));
 
 // $controller->test(new TransF($controller->charger));
-$controller->test(new TransG($controller->charger, $memberNo));
+// $controller->test(new TransG($controller->charger, $memberNo));
 // $controller->test(new TransH($controller->charger, $memberNo));
 // $controller->test(new TransI($controller->charger, $memberNo));
 // $controller->test(new TransJ($controller->charger, $memberNo));
@@ -50,5 +50,12 @@ function hexString($data ){
 // echo hexdec("e0");
 // echo implode(",",Library::stringToHex($memberNo));
 // echo hexString(str_split($hexmemberNo, 2));
-// $val = Library::hexstrTohex($memberNo);
+echo implode(",", Library::hexstrTohex($memberNo));
 // echo "\n";
+
+$eval = "e";
+
+echo $eval."\n";
+echo sprintf("%02x\n", ord($eval));
+echo sprintf("%d\n", hexdec($eval));
+

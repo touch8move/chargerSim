@@ -111,18 +111,8 @@ class Library {
         
         echo $val."\n";
         for($i=0;$i<strlen($val); $i+=2){
-            // $retArray[] = $valArray[$i++] << 4 | $valArray[$i++] & 0x0f;
-            echo $val[$i]." ".$val[$i+1]." ";
-            if (ord($val[$i])>=ord('A')){
-                $val[$i] = ord($val[$i])-ord('A')+10;
-            } else {
-                $val[$i] = ord($val[$i])-ord('0');
-            }
-            // echo $val[$i]." ".$val[$i+1]." ";
-            // echo ord($val[$i])." ".ord($val[$i+1])." ";
-            // $retArray[] = sprintf("%02x", (($val[$i] << 4) & 0xf0) | (($val[$i+1]) & 0x0f));
-            $retArray[] = (($val[$i] << 4) & 0xFF) | (($val[$i+1]) & 0x0F);
-            echo sprintf("=> %02x \n", $retArray[$i/2], $retArray[$i/2]);
+            
+            $retArray[] = ((hexdec($val[$i]) << 4) & 0xFF) | (hexdec($val[$i+1]) & 0x0F);
         }
         return $retArray;
     }
