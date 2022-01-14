@@ -17,6 +17,7 @@ require_once "TransJ.php";
 // require_once "TransN.php";
 
 $memberNo = "e0c11001a0083687";
+$hexmemberNo = "0003e0c11001a008";
 // $memberNo = "1111111111111111";
 $controller = new Controller(
     new Charger("11111111","01","1","1","1","CTT0000000","5","012333333333"),
@@ -37,3 +38,17 @@ $controller->test(new TransG($controller->charger, $memberNo));
 
 // $controller->test(new TransM($controller->charger));
 // $controller->test(new TransN($controller->charger));
+
+
+function hexString($data ){
+    $logstr="";
+    for($i=0;$i<count($data);$i++){
+        $logstr=$logstr. sprintf("%02x", $data[$i]);
+    }
+    return   $logstr;
+}
+// echo hexdec("e0");
+// echo implode(",",Library::stringToHex($memberNo));
+// echo hexString(str_split($hexmemberNo, 2));
+// $val = Library::hexstrTohex($memberNo);
+// echo "\n";

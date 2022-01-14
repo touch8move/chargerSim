@@ -73,37 +73,57 @@ class Library {
                         
                         break;
                     case "h":
-                        // var_dump($value->value);
                         $valueArray = str_split($value->value,2);
-                        // $valueArrayCnt = count($valueArray);
-                        // var_dump($valueArray);
-                        // echo sprintf("property: %s, value: %s, byteLength: %d, vArrayCount: %d\n", $property, $value->value, $value->byteLength, $valueArray_cnt);
                         $tmpRet = [];
 
                         for($i=0;$i<$value->byteLength;$i++){
-                            // if($i>=$valueArrayCnt){
-                                // array_push($tmpRet, 0);
-                            // } else {
-                                $t_index = $value->byteLength-$i-1;
-                                $pack = pack('H*',$value->value);
-                                var_dump($pack);
-                                $t_val = ($value->value >> (8 * $t_index)) & 0xFF;
-                                echo $property." ".$value->value." ".($t_index*8)." ".$t_val."\n";
                                 array_push($tmpRet, ($value->value >> (8 * ($value->byteLength-$i-1))) & 0xFF);
-                            // }
-                            
                         }
-                        // var_dump($tmpRet);
                         $ret_DataArray = array_merge($ret_DataArray, $tmpRet);
                         break;
                     case "m":
-                        $valueArray = str_split($value->value, 2);
-                        foreach($valueArray as $val){
-                            array_push($ret_DataArray, $val);
-                        }
+                        $tmpRet = Library::hexstrTohex($value->value);
+                        array_merge($ret_DataArray, $tmpRet);
+                        break;
+                        
                 }
             }
         }
         return $ret_DataArray;
+    }
+
+    public static function stringToHex($val){
+        $length = strlen($val);
+        if($length == 1){
+            $val = "0".$val;
+        }
+        $dataArray = [];
+    
+        for($i=0;$i<$length;$i+=2){
+            $dataArray[] = hexdec(ord(substr($val, $i, 2)));
+        }
+        echo implode(",", $dataArray);
+        return $dataArray;
+    }
+    public static function hexstrTohex($val){
+        $val = strtoupper($val);
+        $retArray = [];
+        
+        echo $val."\n";
+        for($i=0;$i<strlen($val); $i+=2){
+            // $retArray[] = $valArray[$i++] << 4 | $valArray[$i++] & 0x0f;
+            echo $val[$i]." ".$val[$i+1]." ";
+            if (ord($val[$i])>=ord('A')){
+                $val[$i] = ord($val[$i])-ord('A')+10;
+            } else {
+                $val[$i] = ord($val[$i])-ord('0');
+            }
+            // echo $val[$i]." ".$val[$i+1]." ";
+            // echo ord($val[$i])." ".ord($val[$i+1])." ";
+            // $retArray[] = sprintf("%02x", (($val[$i] << 4) & 0xf0) | (($val[$i+1]) & 0x0f));
+            $retArray[] = (($val[$i] << 4) & 0xFF) | (($val[$i+1]) & 0x0F);
+            echo sprintf("=> %02x \n", $retArray[$i/2], $retArray[$i/2]);
+        }
+        return $retArray;
     }
 }
