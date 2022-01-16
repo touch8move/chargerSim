@@ -39,23 +39,9 @@ $controller = new Controller(
 // $controller->test(new TransM($controller->charger));
 // $controller->test(new TransN($controller->charger));
 
-
-function hexString($data ){
-    $logstr="";
-    for($i=0;$i<count($data);$i++){
-        $logstr=$logstr. sprintf("%02x", $data[$i]);
-    }
-    return   $logstr;
+echo $memberNo."\n";
+echo implode(",", $hexmemNoArray = Library::hexstrTohex($memberNo))."\n";
+foreach ($hexmemNoArray as $item){
+    echo sprintf("%02x", $item);
 }
-// echo hexdec("e0");
-// echo implode(",",Library::stringToHex($memberNo));
-// echo hexString(str_split($hexmemberNo, 2));
-echo implode(",", Library::hexstrTohex($memberNo));
 // echo "\n";
-
-$eval = "e";
-
-echo $eval."\n";
-echo sprintf("%02x\n", ord($eval));
-echo sprintf("%d\n", hexdec($eval));
-

@@ -109,7 +109,7 @@ class Library {
         $val = strtoupper($val);
         $retArray = [];
         
-        echo $val."\n";
+        // echo $val."\n";
         for($i=0;$i<strlen($val); $i+=2){
             
             $retArray[] = ((hexdec($val[$i]) << 4) & 0xFF) | (hexdec($val[$i+1]) & 0x0F);
