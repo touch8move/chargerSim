@@ -22,6 +22,7 @@ class Charger {
     public $rsrp;
     public $memberType;
     public $memberNo;
+    public $chargedKwhByHour;
     public $chargingStartTime;
     public $chargingEndTime;
     public $unPlugedTime;
@@ -41,7 +42,7 @@ class Charger {
         $this->mdn = new Property("mdn", $mdn, 12, "a");
 
         $this->charger_state = new Property("charger_state", 0, 2);
-        $this->charging_state = new Property("charging_state", 0, 2);;
+        $this->charging_state = new Property("charging_state", 0, 1);;
         $this->kwh = new Property("kwh", 0, 4); // 충전기 사용 전력량
         $this->availAmpere = new Property("availAmpere", 0, 4); // 공급가능 전력량
         $this->channelAmpere = new Property("channelAmpere", 0, 4); // 채널 설정 전류량
@@ -53,6 +54,7 @@ class Charger {
         $this->rsrp = new Property("rsrp", 0, 1);;
         $this->memberType = new Property("memberType", 0, 1);
         $this->memberNo = new Property("memberNo", 0, 8);
+        $this->chargedKwhByHour = new Property("chargedKwhByHour", [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], 48);
         $this->chargingStartTime = new Property("chargingStartTime", 0, 6);
         $this->chargingEndTime = new Property("chargingEndTime", 0, 6);
         $this->unPlugedTime = new Property("unPlugedTime", 0, 6);

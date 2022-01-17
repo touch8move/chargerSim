@@ -6,13 +6,13 @@ class TransM extends Trans {
     public $ins;
     public $ml;
 
-    public $memberNo;
+    public $dnType;
     
-    function __construct($charger, $memberNo)
+    function __construct($charger, $dnType)
     {
         $this->ins = new Property("ins", "m", 1,"a");
         $this->ml = new Property("ml",13, 2);
-        $this->memberNo = new Property("memberNo", $memberNo, 8);
         parent::__construct($charger);
+        $this->dnType = new Property("dnType", $dnType, 1);
     }
 }

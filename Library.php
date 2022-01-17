@@ -50,43 +50,51 @@ class Library {
         // $retIndex = 0;
         // var_dump($properties);
         foreach($properties as $property => $value){
-            // var_dump($value);
             if(is_object($value)){
-                // var_dump($value);
-                // echo $retIndex."\n";
+                $tmpRet = [];
                 switch($value->convertType){
                     case "a":
                         $valueArray = str_split($value->value);
                         for($i=0;$i<$value->byteLength;$i++){
-                            array_push($ret_DataArray, ord($valueArray[$i]));
+                            array_push($tmpRet, ord($valueArray[$i]));
                         }
                         break;
                     case "b":
                         // only datetime
-                        array_push($ret_DataArray, hexdec(date("y", $value)));
-                        array_push($ret_DataArray, hexdec(date("m", $value)));
-                        array_push($ret_DataArray, hexdec(date("d", $value)));
-
-                        array_push($ret_DataArray, hexdec(date("H", $value)));
-                        array_push($ret_DataArray, hexdec(date("i", $value)));
-                        array_push($ret_DataArray, hexdec(date("s", $value)));
                         
+                        array_push($tmpRet, hexdec(date("y", $value->value)));
+                        array_push($tmpRet, hexdec(date("m", $value->value)));
+                        array_push($tmpRet, hexdec(date("d", $value->value)));
+
+                        array_push($tmpRet, hexdec(date("H", $value->value)));
+                        array_push($tmpRet, hexdec(date("i", $value->value)));
+                        array_push($tmpRet, hexdec(date("s", $value->value)));
+                        echo date("y", $value->value)."\n";
                         break;
                     case "h":
-                        $valueArray = str_split($value->value,2);
-                        $tmpRet = [];
-
+                        $valueArray = str_split($value->value, 2);
                         for($i=0;$i<$value->byteLength;$i++){
                                 array_push($tmpRet, ($value->value >> (8 * ($value->byteLength-$i-1))) & 0xFF);
                         }
-                        $ret_DataArray = array_merge($ret_DataArray, $tmpRet);
+                        
                         break;
                     case "m":
                         $tmpRet = Library::hexstrTohex($value->value);
-                        array_merge($ret_DataArray, $tmpRet);
+                        
                         break;
+                    
+                    case "p":
+                        foreach($value->value as $item){
+                            // $tKwh = ($item >> 8) & 0xFF;
+                            // $tKwh = ($item >> 0) & 0xFF;
+                            
+                            array_push($tmpRet, ($item >> 8));
+                            array_push($tmpRet, ($item >> 0));
+                        }
                         
                 }
+                echo $value->name." : ".json_encode($value->value)." length: ".$value->byteLength." changed: ". implode(",", $tmpRet)."\n";
+                $ret_DataArray = array_merge($ret_DataArray, $tmpRet);
             }
         }
         return $ret_DataArray;
@@ -112,7 +120,7 @@ class Library {
         // echo $val."\n";
         for($i=0;$i<strlen($val); $i+=2){
             
-            $retArray[] = ((hexdec($val[$i]) << 4) & 0xFF) | (hexdec($val[$i+1]) & 0x0F);
+            $retArray[] = ((hexdec($val[$i]) << 4) & 0xFF) | (hexdec($val[$i+1]));
         }
         return $retArray;
     }

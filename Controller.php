@@ -24,9 +24,9 @@ class Controller {
         $merge_array = $hexarray;
         $merge_array = array_merge(array(0x01),$hexarray);  // SOH
         $crc=Library::getCRC16($merge_array);
-        array_push($merge_array, ($crc>>8) & 0xFF); // CRC
-        array_push($merge_array, ($crc>>0) & 0xFF); // CRC
-        array_push($merge_array, 4);    // EOT
+        array_push($merge_array, ($crc << 8) & 0xFF); // CRC
+        array_push($merge_array, $crc & 0xFF); // CRC
+        array_push($merge_array, 0x04);    // EOT
         
         $prt = "";
         foreach($merge_array as $value){

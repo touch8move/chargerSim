@@ -22,8 +22,12 @@ class TransH extends Trans {
         $this->ml = new Property("ml",71, 2);
         
         parent::__construct($charger);
-        $this->memberNo = new Property("memberNo", $memberNo, 8);
-        $this->chargingStartTime = new Property("chargingStartTime", 0, 6);
+        $this->memberNo = new Property("memberNo", $memberNo, 8, "m");
+        $start = new Datetime();
+        // $start->sub(new DateInterval("P1H"));
+        
+
+        $this->chargingStartTime = new Property("chargingStartTime", $start->getTimestamp(), 6, "b");
         $this->demandKwh = new Property("demandKwh", 0, 4);
         $this->demandTime = new Property("demandTime", 0, 4);
         $this->demandPrice = new Property("demandPrice", 0, 4);

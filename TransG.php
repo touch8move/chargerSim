@@ -11,7 +11,7 @@ class TransG extends Trans {
     function __construct($charger, $memberNo)
     {
         $this->ins = new Property("ins", "g", 1,"a");
-        $this->ml = new Property("ml",13, 2);
+        $this->ml = new Property("ml",13, 2, "a");
         
         parent::__construct($charger);
         $this->memberNo = new Property("memberNo", $memberNo, 8, "m");

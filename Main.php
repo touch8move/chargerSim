@@ -12,36 +12,39 @@ require_once "TransG.php";
 require_once "TransH.php";
 require_once "TransI.php";
 require_once "TransJ.php";
-// require_once "TransL.php";
-// require_once "TransM.php";
-// require_once "TransN.php";
+require_once "TransL.php";
+require_once "TransM.php";
+require_once "TransN.php";
 
 $memberNo = "e0c11001a0083687";
+// $memberNo = "1010010145540773";
 $hexmemberNo = "0003e0c11001a008";
 // $memberNo = "1111111111111111";
+
+
+$date = new Datetime();
+$startTime = $date->getTimestamp();
 $controller = new Controller(
     new Charger("11111111","01","1","1","1","CTT0000000","5","012333333333"),
     "127.0.0.1",
     "8085"
 );
+$action = [
+    new TransB($controller->charger),
+    new TransD($controller->charger),
+    new TransE($controller->charger),
+    new TransF($controller->charger),
+    new TransG($controller->charger, $memberNo),
+    new TransH($controller->charger, $memberNo),
+    new TransI($controller->charger, $memberNo, [20000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,30]),
+    new TransJ($controller->charger, $memberNo),
+    new TransL($controller->charger, $memberNo, [20000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,30]),
+    new TransM($controller->charger, "0"),
+    new TransN($controller->charger, "0", 0)
 
-// $controller->test(new TransB($controller->charger));
-// $controller->test(new TransD($controller->charger));
-// $controller->test(new TransE($controller->charger));
-
-// $controller->test(new TransF($controller->charger));
-// $controller->test(new TransG($controller->charger, $memberNo));
-// $controller->test(new TransH($controller->charger, $memberNo));
-// $controller->test(new TransI($controller->charger, $memberNo));
-// $controller->test(new TransJ($controller->charger, $memberNo));
-// $controller->test(new TransL($controller->charger));
-
-// $controller->test(new TransM($controller->charger));
-// $controller->test(new TransN($controller->charger));
-
-echo $memberNo."\n";
-echo implode(",", $hexmemNoArray = Library::hexstrTohex($memberNo))."\n";
-foreach ($hexmemNoArray as $item){
-    echo sprintf("%02x", $item);
+];
+foreach($action as $item){
+    echo $item->ins->value."\n";
+    $controller->test($item);
+    usleep(100000);
 }
-// echo "\n";
