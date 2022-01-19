@@ -43,8 +43,11 @@ $action = [
     new TransN($controller->charger, "0", 0)
 
 ];
+while(true){
 foreach($action as $item){
     echo $item->ins->value."\n";
     $controller->test($item);
     usleep(100000);
+}
+usleep(100000);
 }
