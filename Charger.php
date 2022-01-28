@@ -30,7 +30,7 @@ class Charger {
     public $demandTime;
     public $demandPrice;
 
-    function __construct($station_id, $charger_id, $channel, $manufacturer_code, $model_code, $fw_ver, $soundVol, $mdn)
+    function __construct($address, $station_id, $charger_id, $channel, $manufacturer_code, $model_code, $fw_ver, $soundVol, $mdn)
     {
         $this->station_id = new Property("station_id", $station_id, 4);
         $this->charger_id = new Property("charger_id", $charger_id, 1);
@@ -61,5 +61,6 @@ class Charger {
         $this->demandKwh = new Property("demandKwh", 0, 4);
         $this->demandTime = new Property("demandTime", 0, 4);
         $this->demandPrice = new Property("demandPrice", 0, 4);
+        $this->address = $address;
     }
 }

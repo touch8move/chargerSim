@@ -56,7 +56,11 @@ class Library {
                     case "a":
                         $valueArray = str_split($value->value);
                         for($i=0;$i<$value->byteLength;$i++){
-                            array_push($tmpRet, ord($valueArray[$i]));
+                            if (count($valueArray)<=$i){
+                                array_push($tmpRet, 0);
+                            } else {
+                                array_push($tmpRet, ord($valueArray[$i]));
+                            }
                         }
                         break;
                     case "b":
@@ -69,7 +73,7 @@ class Library {
                         array_push($tmpRet, hexdec(date("H", $value->value)));
                         array_push($tmpRet, hexdec(date("i", $value->value)));
                         array_push($tmpRet, hexdec(date("s", $value->value)));
-                        echo date("y", $value->value)."\n";
+                        // echo date("y", $value->value)."\n";
                         break;
                     case "h":
                         $valueArray = str_split($value->value, 2);
@@ -110,7 +114,7 @@ class Library {
         for($i=0;$i<$length;$i+=2){
             $dataArray[] = hexdec(ord(substr($val, $i, 2)));
         }
-        echo implode(",", $dataArray);
+        // echo implode(",", $dataArray);
         return $dataArray;
     }
     public static function hexstrTohex($val){
@@ -124,4 +128,21 @@ class Library {
         }
         return $retArray;
     }
+
+    public static function byteStr2byteArray($s) {
+        return array_slice(unpack("C*", "\0".$s), 1);
+    }
+
+    public static function taillog($data,$type){
+
+        $logstr="";
+            for($i=0;$i<count($data);$i++)
+            {
+                $logstr=$logstr. sprintf("0x%02x,", $data[$i]);
+                 
+            }
+            echo ($type." ".$logstr."\n");
+          
+    }
+    public static function get_time() { $t=explode(' ',microtime()); return (float)$t[0]+(float)$t[1]; }
 }
