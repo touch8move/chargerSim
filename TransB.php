@@ -17,7 +17,7 @@ class TransB extends Trans{
     function __construct($charger)
     {
         $this->ins = new Property("ins", "b", 1, "a");
-        $this->ml = new Property("ml", 44, 2);
+        $this->ml = new Property("ml", 32, 2);
 
         parent::__construct($charger);
         $date = new Datetime();

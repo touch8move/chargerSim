@@ -6,11 +6,11 @@ class TransE extends Trans {
     public $ins;
     public $ml;
 
-    public $channel;
-	public $charger_state;
-    public $kwh;
-	public $availAmpere;
-	public $channelAmpere;
+    // public $channel;
+	// public $charger_state;
+    // public $kwh;
+	// public $availAmpere;
+	// public $channelAmpere;
     
     function __construct($charger)
     {
