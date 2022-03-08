@@ -11,7 +11,7 @@ class TransM extends Trans {
     function __construct($charger, $dnType)
     {
         $this->ins = new Property("ins", "m", 1,"a");
-        $this->ml = new Property("ml",13, 2);
+        $this->ml = new Property("ml",1, 2);
         parent::__construct($charger);
         $this->dnType = new Property("dnType", $dnType, 1);
     }

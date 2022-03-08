@@ -13,7 +13,7 @@ class TransN extends Trans {
     function __construct($charger, $version, $index)
     {
         $this->ins = new Property("ins", "n", 1,"a");
-        $this->ml = new Property("ml",13, 2);
+        $this->ml = new Property("ml",15, 2);
         
         parent::__construct($charger);
 

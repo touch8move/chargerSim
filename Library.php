@@ -40,7 +40,7 @@ class Library {
         $crc = 0xffff;
         for ( $i = 1; $i < count($data) ; ++$i)
             $crc = ($crc >> 8) ^ $crcTable[($crc ^ $data[$i]) & 0x00ff];
-        return $crc;
+        return (int)$crc;
     }
 
     public static function strToHexArray($obj){
@@ -65,7 +65,7 @@ class Library {
                         break;
                     case "b":
                         // only datetime
-                        
+                        if(empty($value->value)===false){
                         array_push($tmpRet, hexdec(date("y", $value->value)));
                         array_push($tmpRet, hexdec(date("m", $value->value)));
                         array_push($tmpRet, hexdec(date("d", $value->value)));
@@ -73,6 +73,14 @@ class Library {
                         array_push($tmpRet, hexdec(date("H", $value->value)));
                         array_push($tmpRet, hexdec(date("i", $value->value)));
                         array_push($tmpRet, hexdec(date("s", $value->value)));
+                        } else {
+                            array_push($tmpRet, hexdec(0));
+                            array_push($tmpRet, hexdec(0));
+                            array_push($tmpRet, hexdec(0));
+                            array_push($tmpRet, hexdec(0));
+                            array_push($tmpRet, hexdec(0));
+                            array_push($tmpRet, hexdec(0));
+                        }
                         // echo date("y", $value->value)."\n";
                         break;
                     case "h":

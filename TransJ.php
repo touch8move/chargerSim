@@ -19,7 +19,6 @@ class TransJ extends Trans {
         
         parent::__construct($charger);
         $this->memberNo = new Property("memberNo", $memberNo, 8, "m");
-        
         $this->charger_state = new Property("charger_state", $memberNo, 2);
         $this->charging_state = new Property("charging_state", $memberNo, 1);
 

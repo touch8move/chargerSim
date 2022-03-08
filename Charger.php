@@ -48,8 +48,8 @@ class Charger {
         $this->channelAmpere = new Property("channelAmpere", 0, 4); // 채널 설정 전류량
         $this->unitprice = new Property("unitprice", null, 48);
         $this->nonmemberprice = new Property("nonmemberprice", 100, 2);
-        $this->temp = new Property("temp", 25, 2);
-        $this->humi = new Property("humi", 40, 2);
+        $this->temp = new Property("temp", 250, 2);
+        $this->humi = new Property("humi", 400, 2);
         $this->eventCode = new Property("eventCode", 0, 1);;
         $this->rsrp = new Property("rsrp", 0, 1);;
         $this->memberType = new Property("memberType", 0, 1);

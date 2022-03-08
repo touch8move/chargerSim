@@ -15,11 +15,16 @@ class TransH extends Trans {
     public $demandKwh;
     public $demandTime;
     public $demandPrice;
+
+    public $prepay_amount;
+    public $prepay_tran_date;
+    public $prepay_tran_no;
+    public $prepay_auth_no;
     
-    function __construct($charger, $memberNo)
+    function __construct($charger, $memberNo, $prepay_amount, $prepay_tran_no, $prepay_auth_no)
     {
         $this->ins = new Property("ins", "h", 1,"a");
-        $this->ml = new Property("ml",71, 2);
+        $this->ml = new Property("ml",93, 2);
         
         parent::__construct($charger);
         $this->memberNo = new Property("memberNo", $memberNo, 8, "m");
@@ -31,5 +36,10 @@ class TransH extends Trans {
         $this->demandKwh = new Property("demandKwh", 0, 4);
         $this->demandTime = new Property("demandTime", 0, 4);
         $this->demandPrice = new Property("demandPrice", 0, 4);
+
+        $this->prepay_amount = new Property("prepay_amount", $prepay_amount, 4, "h");
+        $this->prepay_tran_date = new Property("prepay_tran_date", $start->getTimestamp(), 6, "b");
+        $this->prepay_tran_no = new Property("prepay_tran_no", $prepay_tran_no, 30, "a");
+        $this->prepay_auth_no = new Property("prepay_auth_no", $prepay_auth_no, 20, "a");
     }
 }
